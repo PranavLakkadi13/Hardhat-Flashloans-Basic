@@ -2,8 +2,8 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "/Users/pranavlakkadi/HH-FCC/FlashLoan/contracts/exchange/IExchange.sol": {
-      "lastModificationDate": 1696194710744,
-      "contentHash": "39d5167b9cc2ed24f3cbc79bf353457e",
+      "lastModificationDate": 1696253743590,
+      "contentHash": "4874be2158264172fb49fcf5394733ea",
       "sourceName": "contracts/exchange/IExchange.sol",
       "solcConfig": {
         "version": "0.8.10",
@@ -37,15 +37,15 @@
       },
       "imports": [],
       "versionPragmas": [
-        "0.8.10"
+        "^0.8.0"
       ],
       "artifacts": [
         "IExchange"
       ]
     },
     "/Users/pranavlakkadi/HH-FCC/FlashLoan/contracts/flashloan/FlashLoan.sol": {
-      "lastModificationDate": 1696237608177,
-      "contentHash": "5455743d7f543d085706ebc1fb6bb0ca",
+      "lastModificationDate": 1696251383261,
+      "contentHash": "70729925fa315ac268d30de61c2688df",
       "sourceName": "contracts/flashloan/FlashLoan.sol",
       "solcConfig": {
         "version": "0.8.10",
@@ -83,7 +83,7 @@
         "@aave/core-v3/contracts/dependencies/openzeppelin/contracts/IERC20.sol"
       ],
       "versionPragmas": [
-        "0.8.10"
+        "^0.8.0"
       ],
       "artifacts": [
         "FlashLoan"
@@ -349,6 +349,50 @@
       ],
       "artifacts": [
         "DataTypes"
+      ]
+    },
+    "/Users/pranavlakkadi/HH-FCC/FlashLoan/contracts/exchange/Exchange.sol": {
+      "lastModificationDate": 1696253906126,
+      "contentHash": "9e94f1eb9d34ed19813ab8f467bd58a7",
+      "sourceName": "contracts/exchange/Exchange.sol",
+      "solcConfig": {
+        "version": "0.8.10",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "@aave/core-v3/contracts/dependencies/openzeppelin/contracts/IERC20.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "Exchange"
       ]
     }
   }

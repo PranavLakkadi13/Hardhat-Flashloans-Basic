@@ -1,0 +1,41 @@
+{
+  "language": "Solidity",
+  "sources": {
+    "@aave/core-v3/contracts/dependencies/openzeppelin/contracts/IERC20.sol": {
+      "content": "// SPDX-License-Identifier: AGPL-3.0\npragma solidity ^0.8.0;\n\n/**\n * @dev Interface of the ERC20 standard as defined in the EIP.\n */\ninterface IERC20 {\n  /**\n   * @dev Returns the amount of tokens in existence.\n   */\n  function totalSupply() external view returns (uint256);\n\n  /**\n   * @dev Returns the amount of tokens owned by `account`.\n   */\n  function balanceOf(address account) external view returns (uint256);\n\n  /**\n   * @dev Moves `amount` tokens from the caller's account to `recipient`.\n   *\n   * Returns a boolean value indicating whether the operation succeeded.\n   *\n   * Emits a {Transfer} event.\n   */\n  function transfer(address recipient, uint256 amount) external returns (bool);\n\n  /**\n   * @dev Returns the remaining number of tokens that `spender` will be\n   * allowed to spend on behalf of `owner` through {transferFrom}. This is\n   * zero by default.\n   *\n   * This value changes when {approve} or {transferFrom} are called.\n   */\n  function allowance(address owner, address spender) external view returns (uint256);\n\n  /**\n   * @dev Sets `amount` as the allowance of `spender` over the caller's tokens.\n   *\n   * Returns a boolean value indicating whether the operation succeeded.\n   *\n   * IMPORTANT: Beware that changing an allowance with this method brings the risk\n   * that someone may use both the old and the new allowance by unfortunate\n   * transaction ordering. One possible solution to mitigate this race\n   * condition is to first reduce the spender's allowance to 0 and set the\n   * desired value afterwards:\n   * https://github.com/ethereum/EIPs/issues/20#issuecomment-263524729\n   *\n   * Emits an {Approval} event.\n   */\n  function approve(address spender, uint256 amount) external returns (bool);\n\n  /**\n   * @dev Moves `amount` tokens from `sender` to `recipient` using the\n   * allowance mechanism. `amount` is then deducted from the caller's\n   * allowance.\n   *\n   * Returns a boolean value indicating whether the operation succeeded.\n   *\n   * Emits a {Transfer} event.\n   */\n  function transferFrom(address sender, address recipient, uint256 amount) external returns (bool);\n\n  /**\n   * @dev Emitted when `value` tokens are moved from one account (`from`) to\n   * another (`to`).\n   *\n   * Note that `value` may be zero.\n   */\n  event Transfer(address indexed from, address indexed to, uint256 value);\n\n  /**\n   * @dev Emitted when the allowance of a `spender` for an `owner` is set by\n   * a call to {approve}. `value` is the new allowance.\n   */\n  event Approval(address indexed owner, address indexed spender, uint256 value);\n}\n"
+    },
+    "contracts/exchange/Exchange.sol": {
+      "content": "// contracts/FlashLoan.sol\n// SPDX-License-Identifier: MIT\npragma solidity ^0.8.0;\n\nimport {IERC20} from \"@aave/core-v3/contracts/dependencies/openzeppelin/contracts/IERC20.sol\";\n\ncontract Exchange {\n    address payable public owner;\n\n    // Aave ERC20 Token addresses on sepolia network\n    address private immutable daiAddress =\n        0xFF34B3d4Aee8ddCd6F9AFFFB6Fe49bD371b8a357;\n    address private immutable usdcAddress =\n        0x94a9D9AC8a22534E3FaCa9F4e7F2E2cf85d5E4C8;\n\n    IERC20 private dai;\n    IERC20 private usdc;\n\n    // exchange rate indexes\n    uint256 dexARate = 90;\n    uint256 dexBRate = 100;\n\n    // keeps track of individuals' dai balances\n    mapping(address => uint256) public daiBalances;\n\n    // keeps track of individuals' USDC balances\n    mapping(address => uint256) public usdcBalances;\n\n    constructor() {\n        owner = payable(msg.sender);\n        dai = IERC20(daiAddress);\n        usdc = IERC20(usdcAddress);\n    }\n\n    function depositUSDC(uint256 _amount) external {\n        usdcBalances[msg.sender] += _amount;\n        uint256 allowance = usdc.allowance(msg.sender, address(this));\n        require(allowance >= _amount, \"Check the token allowance\");\n        usdc.transferFrom(msg.sender, address(this), _amount);\n    }\n\n    function depositDAI(uint256 _amount) external {\n        daiBalances[msg.sender] += _amount;\n        uint256 allowance = dai.allowance(msg.sender, address(this));\n        require(allowance >= _amount, \"Check the token allowance\");\n        dai.transferFrom(msg.sender, address(this), _amount);\n    }\n\n    function buyDAI() external {\n        uint256 daiToReceive = ((usdcBalances[msg.sender] / dexARate) * 100) *\n            (10**12);\n        dai.transfer(msg.sender, daiToReceive);\n    }\n\n    function sellDAI() external {\n        uint256 usdcToReceive = ((daiBalances[msg.sender] * dexBRate) / 100) /\n            (10**12);\n        usdc.transfer(msg.sender, usdcToReceive);\n    }\n\n    function getBalance(address _tokenAddress) external view returns (uint256) {\n        return IERC20(_tokenAddress).balanceOf(address(this));\n    }\n\n    function withdraw(address _tokenAddress) external onlyOwner {\n        IERC20 token = IERC20(_tokenAddress);\n        token.transfer(msg.sender, token.balanceOf(address(this)));\n    }\n\n    modifier onlyOwner() {\n        require(\n            msg.sender == owner,\n            \"Only the contract owner can call this function\"\n        );\n        _;\n    }\n\n    receive() external payable {}\n}"
+    },
+    "contracts/exchange/IExchange.sol": {
+      "content": "// SPDX-License-Identifier: MIT\npragma solidity ^0.8.0;\n\ninterface IExchange {\n    function depositUSDC(uint256 _amount) external;\n\n    function depositDAI(uint256 _amount) external;\n\n    function buyDAI() external;\n\n    function sellDAI() external;\n}"
+    }
+  },
+  "settings": {
+    "optimizer": {
+      "enabled": false,
+      "runs": 200
+    },
+    "outputSelection": {
+      "*": {
+        "*": [
+          "abi",
+          "evm.bytecode",
+          "evm.deployedBytecode",
+          "evm.methodIdentifiers",
+          "metadata",
+          "devdoc",
+          "userdoc",
+          "storageLayout",
+          "evm.gasEstimates"
+        ],
+        "": [
+          "ast"
+        ]
+      }
+    },
+    "metadata": {
+      "useLiteralContent": true
+    }
+  }
+}
