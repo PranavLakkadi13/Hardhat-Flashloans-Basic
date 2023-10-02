@@ -1,4 +1,4 @@
-const {ethers,network, getChainId} = require("hardhat");
+const {ethers,network} = require("hardhat");
 const {verify} = require("../utils/verify");
 
 module.exports = async ({getNamedAccounts,deployments}) => {

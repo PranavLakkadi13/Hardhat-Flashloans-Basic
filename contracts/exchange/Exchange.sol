@@ -17,6 +17,8 @@ contract Exchange {
     IERC20 private usdc;
 
     // exchange rate indexes
+    // assume that the dexArate is the rate at 1 dex and the dexB is the other dex
+    // DexA rate is 1dai is 90 of usdc and on dexB its 1usdc == 1dai (arbitrage opportunity)
     uint256 dexARate = 90;
     uint256 dexBRate = 100;
 
