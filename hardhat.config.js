@@ -21,11 +21,21 @@ module.exports = {
   defaultNetwork: "hardhat",
   networks: {
     hardhat: {
+      blockGasLimit: 8000000000,
+      gas: 2100000,
       chainId: 31337,
       blockConfirmations: 1,
+      allowUnlimitedContractSize: true,
       // forking: {
       //   url: RPC_URL_Alchemy_MAINNET,
       // },
+    },
+    localhost : {
+      gas: 2100000,
+      blockGasLimit: 8000000000,
+      chainId: 31337,
+      blockConfirmations: 1,
+      allowUnlimitedContractSize: true,
     },
     sepolia: {
       url: RPC_URL_Alchemy_SEPOLIA,
@@ -43,7 +53,7 @@ module.exports = {
   solidity: {
     compilers: [
       { version: "0.4.19" },
-      { version: "0.8.20" },
+      { version: "0.8.10" },
       { version: "0.6.6" },
     ],
   },
