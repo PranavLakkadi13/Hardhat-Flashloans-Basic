@@ -28,14 +28,14 @@ async function Arbitrage() {
     // approving the Arbitrage contract the tokens for swap
     console.log("arbitrage contract approving the token to DEX") 
     const approveDAIforDEX = await ArbitrageContract.approveUSDC("1200000000");
-    const approveUSDCforDEX = await ArbitrageContract.approveDAI(ethers.utils.parseEther("1101"));
+    const approveUSDCforDEX = await ArbitrageContract.approveDAI(ethers.utils.parseEther("1200"));
     console.log("Approved the tokens ");
 
     console.log("THe balance of the tokens in arbitrage contract before loan");
     const balanceofDAIP = await ArbitrageContract.getBalance(daiAddress);
     console.log(balanceofDAIP.toString());
     const balanceofUSDCP = await ArbitrageContract.getBalance(usdcAddress);
-    console.log(balanceofUSDCP.toString);
+    console.log(balanceofUSDCP.toString());
 
     const requestFlashloan = await ArbitrageContract.requestFlashLoan(usdcAddress, "1000000000");
     await requestFlashloan.wait(1);
@@ -44,7 +44,7 @@ async function Arbitrage() {
     const balanceofDAI = await ArbitrageContract.getBalance(daiAddress);
     console.log(balanceofDAI.toString());
     const balanceofUSDC = await ArbitrageContract.getBalance(usdcAddress);
-    console.log(balanceofUSDC.toString);
+    console.log(balanceofUSDC.toString());
     
 }
 
