@@ -1,4 +1,3 @@
-// contracts/FlashLoan.sol
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
@@ -8,13 +7,13 @@ contract Exchange {
     address payable public owner;
 
     // Aave ERC20 Token addresses on sepolia network
-    address private immutable daiAddress =
+    address private constant daiAddress =
         0xFF34B3d4Aee8ddCd6F9AFFFB6Fe49bD371b8a357;
-    address private immutable usdcAddress =
+    address private constant usdcAddress =
         0x94a9D9AC8a22534E3FaCa9F4e7F2E2cf85d5E4C8;
 
-    IERC20 private dai;
-    IERC20 private usdc;
+    IERC20 private immutable dai;
+    IERC20 private immutable usdc;
 
     // exchange rate indexes
     // assume that the dexArate is the rate at 1 dex and the dexB is the other dex

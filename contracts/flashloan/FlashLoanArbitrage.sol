@@ -16,7 +16,7 @@ contract FlashLoanArbitrage is FlashLoanSimpleReceiverBase {
     address private immutable usdcAddress =
         0x94a9D9AC8a22534E3FaCa9F4e7F2E2cf85d5E4C8;
     address private dexContractAddress =
-        0x944da3461ddCD6414F476445a5a615cFf140092D;
+        0x08a681D79a2B43D37cF644AB5f2167281A045e34;
 
     IERC20 private dai;
     IERC20 private usdc;
@@ -81,6 +81,7 @@ contract FlashLoanArbitrage is FlashLoanSimpleReceiverBase {
         );
     }
 
+    // Here i am approving the dex to swap my tokens 
     function approveUSDC(uint256 _amount) external returns (bool) {
         return usdc.approve(dexContractAddress, _amount);
     }
@@ -89,6 +90,7 @@ contract FlashLoanArbitrage is FlashLoanSimpleReceiverBase {
         return usdc.allowance(address(this), dexContractAddress);
     }
 
+    // Here i am approving the dex to swap my tokens
     function approveDAI(uint256 _amount) external returns (bool) {
         return dai.approve(dexContractAddress, _amount);
     }

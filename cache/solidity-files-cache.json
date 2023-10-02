@@ -1,10 +1,10 @@
 {
   "_format": "hh-sol-cache-2",
   "files": {
-    "/Users/pranavlakkadi/HH-FCC/FlashLoan/contracts/exchange/Exchange.sol": {
-      "lastModificationDate": 1696255075425,
-      "contentHash": "4588bc17602709878f8624186f65d45d",
-      "sourceName": "contracts/exchange/Exchange.sol",
+    "/Users/pranavlakkadi/HH-FCC/FlashLoan/contracts/IERC20.sol": {
+      "lastModificationDate": 1696272203286,
+      "contentHash": "81f7b2c10846abf11d1f818b6cd28ce0",
+      "sourceName": "contracts/IERC20.sol",
       "solcConfig": {
         "version": "0.8.10",
         "settings": {
@@ -41,9 +41,7 @@
       "versionPragmas": [
         "^0.8.0"
       ],
-      "artifacts": [
-        "Exchange"
-      ]
+      "artifacts": []
     },
     "/Users/pranavlakkadi/HH-FCC/FlashLoan/node_modules/@aave/core-v3/contracts/dependencies/openzeppelin/contracts/IERC20.sol": {
       "lastModificationDate": 1696167560860,
@@ -87,10 +85,10 @@
         "IERC20"
       ]
     },
-    "/Users/pranavlakkadi/HH-FCC/FlashLoan/contracts/flashloan/FlashLoan.sol": {
-      "lastModificationDate": 1696251383261,
-      "contentHash": "70729925fa315ac268d30de61c2688df",
-      "sourceName": "contracts/flashloan/FlashLoan.sol",
+    "/Users/pranavlakkadi/HH-FCC/FlashLoan/contracts/flashloan/FlashLoanArbitrage.sol": {
+      "lastModificationDate": 1696271600244,
+      "contentHash": "1241ce55214d5db72d094ccb63310a64",
+      "sourceName": "contracts/flashloan/FlashLoanArbitrage.sol",
       "solcConfig": {
         "version": "0.8.10",
         "settings": {
@@ -124,13 +122,56 @@
       "imports": [
         "@aave/core-v3/contracts/flashloan/base/FlashLoanSimpleReceiverBase.sol",
         "@aave/core-v3/contracts/interfaces/IPoolAddressesProvider.sol",
-        "@aave/core-v3/contracts/dependencies/openzeppelin/contracts/IERC20.sol"
+        "@aave/core-v3/contracts/dependencies/openzeppelin/contracts/IERC20.sol",
+        "../exchange/IExchange.sol"
       ],
       "versionPragmas": [
         "^0.8.0"
       ],
       "artifacts": [
-        "FlashLoan"
+        "FlashLoanArbitrage"
+      ]
+    },
+    "/Users/pranavlakkadi/HH-FCC/FlashLoan/contracts/exchange/IExchange.sol": {
+      "lastModificationDate": 1696253743590,
+      "contentHash": "4874be2158264172fb49fcf5394733ea",
+      "sourceName": "contracts/exchange/IExchange.sol",
+      "solcConfig": {
+        "version": "0.8.10",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "IExchange"
       ]
     },
     "/Users/pranavlakkadi/HH-FCC/FlashLoan/node_modules/@aave/core-v3/contracts/interfaces/IPoolAddressesProvider.sol": {
@@ -353,52 +394,10 @@
         "DataTypes"
       ]
     },
-    "/Users/pranavlakkadi/HH-FCC/FlashLoan/contracts/exchange/IExchange.sol": {
-      "lastModificationDate": 1696253743590,
-      "contentHash": "4874be2158264172fb49fcf5394733ea",
-      "sourceName": "contracts/exchange/IExchange.sol",
-      "solcConfig": {
-        "version": "0.8.10",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata",
-                "devdoc",
-                "userdoc",
-                "storageLayout",
-                "evm.gasEstimates"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          },
-          "metadata": {
-            "useLiteralContent": true
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "IExchange"
-      ]
-    },
-    "/Users/pranavlakkadi/HH-FCC/FlashLoan/contracts/flashloan/FlashLoanArbitrage.sol": {
-      "lastModificationDate": 1696259217198,
-      "contentHash": "97e6633e9fff5159f36d4d11659a1eb2",
-      "sourceName": "contracts/flashloan/FlashLoanArbitrage.sol",
+    "/Users/pranavlakkadi/HH-FCC/FlashLoan/contracts/flashloan/FlashLoan.sol": {
+      "lastModificationDate": 1696251383261,
+      "contentHash": "70729925fa315ac268d30de61c2688df",
+      "sourceName": "contracts/flashloan/FlashLoan.sol",
       "solcConfig": {
         "version": "0.8.10",
         "settings": {
@@ -432,14 +431,57 @@
       "imports": [
         "@aave/core-v3/contracts/flashloan/base/FlashLoanSimpleReceiverBase.sol",
         "@aave/core-v3/contracts/interfaces/IPoolAddressesProvider.sol",
-        "@aave/core-v3/contracts/dependencies/openzeppelin/contracts/IERC20.sol",
-        "../exchange/IExchange.sol"
+        "@aave/core-v3/contracts/dependencies/openzeppelin/contracts/IERC20.sol"
       ],
       "versionPragmas": [
         "^0.8.0"
       ],
       "artifacts": [
-        "FlashLoanArbitrage"
+        "FlashLoan"
+      ]
+    },
+    "/Users/pranavlakkadi/HH-FCC/FlashLoan/contracts/exchange/Exchange.sol": {
+      "lastModificationDate": 1696270519371,
+      "contentHash": "9950e96de2887985b8cd7e73bfc44bd5",
+      "sourceName": "contracts/exchange/Exchange.sol",
+      "solcConfig": {
+        "version": "0.8.10",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "@aave/core-v3/contracts/dependencies/openzeppelin/contracts/IERC20.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "Exchange"
       ]
     }
   }
